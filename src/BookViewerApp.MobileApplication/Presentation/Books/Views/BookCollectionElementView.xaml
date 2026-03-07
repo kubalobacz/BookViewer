@@ -9,6 +9,11 @@
     x:DataType="uimodels:BookCollectionElementUIModel"
     ColumnDefinitions="auto,*"
     RowDefinitions="*,auto">
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Color x:Key="DescriptionTextColor">#76736B</Color>
+        </ResourceDictionary>
+    </Grid.Resources>
     <Label
         x:Name="LetterLabel"
         Margin="10"
@@ -49,7 +54,7 @@
                         BackgroundColor="#F4F0E6"
                         ColumnDefinitions="*"
                         HeightRequest="200"
-                        RowDefinitions="*,Auto,auto"
+                        RowDefinitions="3*,*,auto"
                         WidthRequest="150">
                         <ffimageloading:CachedImage
                             Grid.Row="0"
@@ -67,12 +72,12 @@
                             Grid.Row="2"
                             Margin="5"
                             FontSize="10"
-                            LineBreakMode="TailTruncation"
-                            TextColor="Green">
+                            LineBreakMode="TailTruncation">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding ReleaseYear}" TextColor="#76736B" />
-                                    <Span Text="{Binding Description}" />
+                                    <Span Text="{Binding ReleaseYear}" TextColor="{StaticResource DescriptionTextColor}" />
+                                    <Span Text=" | " />
+                                    <Span Text="{Binding Publisher}" TextColor="{StaticResource DescriptionTextColor}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
