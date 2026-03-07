@@ -1,13 +1,12 @@
-﻿using BookViewerApp.Data.Books.Entities;
-using BookViewerApp.Domain.Books.Models;
+﻿using BookViewerApp.Domain.Books.Models;
 
 namespace BookViewerApp.Data.Books.DTOs.Mappings
 {
     public static class StephenKingApiBookDTOMappingExtension
     {
-        public static BookDbEntity ToBookDbEntity(this StephenKingApiBookDTO dto)
+        public static Book ToBook(this StephenKingApiBookDTO dto)
         {
-            return new BookDbEntity
+            return new Book
             {
                 ID = dto.Id,
                 Title = dto.Title,
@@ -15,6 +14,5 @@ namespace BookViewerApp.Data.Books.DTOs.Mappings
                 Publisher = dto.Publisher
             };
         }
-
     }
 }

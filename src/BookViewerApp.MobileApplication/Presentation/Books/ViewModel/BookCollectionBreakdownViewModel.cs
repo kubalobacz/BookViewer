@@ -96,9 +96,9 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
             Books = domainBookModels
                 .Select(book =>
                 {
-                    var sectionLetter = book.PreferedSectionLetter ?? characterExtractor.DecideBookTitleFirstLetter(book.Title);
+                    var sectionLetter = book.PreferedSectionLetter ?? characterExtractor.DecideBookTitleFirstLetter(book.Title).ToString();
 
-                    return book.ToBookUIModel(sectionLetter);
+                    return book.ToBookUIModel(sectionLetter.FirstOrDefault());
                 })
                 .GroupBy(b => b.LetterSection)
                 .Select(g => new BookCollectionElementUIModel(
