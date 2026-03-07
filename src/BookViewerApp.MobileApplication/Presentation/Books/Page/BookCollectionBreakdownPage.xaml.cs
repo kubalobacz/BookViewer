@@ -12,6 +12,7 @@ public partial class BookCollectionBreakdownPage : ContentPage
         InitializeComponent();
     }
 
+    //Move this logic to BasePage
     protected override async void OnAppearing()
     {
         var viewModel = (BookCollectionBreakdownViewModel)BindingContext;

@@ -4,7 +4,6 @@
     {
         public char DecideBookTitleFirstLetter(string title)
         {
-
             //Requirements specified only A-Z characters but wasn't sure what to do with other cases
             if (string.IsNullOrWhiteSpace(title))
                 return '#';

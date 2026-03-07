@@ -9,6 +9,7 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.UIModels
         public int ReleaseYear { get; init; }
         public string Publisher { get; init; }
         public string? CoverFileName { get; init; }
+        public char LetterSection { get; set; }
         public ImageSource? Image { get; }
 
         public BookUIModel(string title, string publisher, string? coverFileName = null)
