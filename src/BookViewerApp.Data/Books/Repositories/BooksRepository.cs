@@ -35,9 +35,6 @@ namespace BookViewerApp.Data.Books.Repositories
                 booksToReturn = bookDbEntities;
             }
 
-            booksToReturn.Add(book);
-
-
             return booksToReturn.Select(b => b.ToBook())
                 .ToList()
                 .AsReadOnly();

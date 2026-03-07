@@ -6,6 +6,7 @@
         public required string Title { get; set; }
         public int ReleaseYear { get; set; }
         public required string Publisher { get; set; }
+        public char? PreferedSectionLetter { get; set; }
         public string? CoverFileName { get; set; }
     }
 }

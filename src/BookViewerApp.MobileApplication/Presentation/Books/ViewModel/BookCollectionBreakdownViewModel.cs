@@ -70,7 +70,7 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
                 var characterExtractor = new BookTitleFirstCharacterExtractor();
                 var titleFirstLetter = characterExtractor.DecideBookTitleFirstLetter(book.Title);
                 var booksCollection = Books.FirstOrDefault(b => b.StartingLetter == (char)sectionLetter);
-                booksCollection!.Books.Add(book.ToBookUIModel());
+                booksCollection!.Books.Add(book.ToBookUIModel((char)sectionLetter));
             }
             catch (Exception e)
             {
@@ -90,22 +90,26 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
 
         private async Task SetBooks()
         {
-            {
-                var bookUIModels = new List<BookUIModel>();
-                var domainBookModels = await _getAllBooksUseCase.ExecuteAsync(_imageResizeRatio);
-                foreach (var book in domainBookModels)
+            var domainBookModels = await _getAllBooksUseCase.ExecuteAsync(_imageResizeRatio);
+            var characterExtractor = new BookTitleFirstCharacterExtractor();
+
+            Books = domainBookModels
+                .Select(book =>
                 {
-                    bookUIModels.Add(book.ToBookUIModel());
-                }
+                    var sectionLetter = book.PreferedSectionLetter ?? characterExtractor.DecideBookTitleFirstLetter(book.Title);
 
-                var characterExtractor = new BookTitleFirstCharacterExtractor();
-                Books = bookUIModels.GroupBy(b => characterExtractor.DecideBookTitleFirstLetter(b.Title))
-                    .Select(b => new BookCollectionElementUIModel(b.ToObservableCollection(), b.Key, NavigateToAddBookPageCommand))
-                    .OrderBy(b => b.StartingLetter)
-                    .ToList();
+                    return book.ToBookUIModel(sectionLetter);
+                })
+                .GroupBy(b => b.LetterSection)
+                .Select(g => new BookCollectionElementUIModel(
+                    g.ToObservableCollection(),
+                    g.Key,
+                    NavigateToAddBookPageCommand))
+                .OrderBy(b => b.StartingLetter)
+                .ToList();
 
-                IsInitialized = true;
-            }
+            IsInitialized = true;
+
         }
     }
 }
