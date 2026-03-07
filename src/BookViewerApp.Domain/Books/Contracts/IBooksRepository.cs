@@ -3,7 +3,7 @@ using BookViewerApp.Domain.Common;
 
 namespace BookViewerApp.Domain.Books.Contracts
 {
-    public interface IBooksRepository : IRepositoryBase<Book>
+    public interface IBooksRepository : ICachableRepositoryBase<Book>
     {
     }
 }
