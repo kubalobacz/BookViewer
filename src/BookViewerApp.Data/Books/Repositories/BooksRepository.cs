@@ -35,14 +35,6 @@ namespace BookViewerApp.Data.Books.Repositories
                 booksToReturn = bookDbEntities;
             }
 
-
-            var book = new BookDbEntity
-            {
-                Title = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                Publisher = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
-                Description = "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
-                CoverFileName = booksToReturn[0].CoverFileName,
-            };
             booksToReturn.Add(book);
 
 
@@ -78,7 +70,7 @@ namespace BookViewerApp.Data.Books.Repositories
         public async Task<bool> HasCachedData()
         {
             await InitializeAsync();
-            var book = await _database.Table<BookDbEntity>().FirstOrDefaultAsync();
+            var book = await _database!.Table<BookDbEntity>().FirstOrDefaultAsync();
             return book != null;
         }
     }

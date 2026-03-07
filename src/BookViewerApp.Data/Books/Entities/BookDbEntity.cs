@@ -7,7 +7,6 @@ namespace BookViewerApp.Data.Books.Entities
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public required string Title { get; set; }
-        public string? Description { get; set; }
         public int ReleaseYear { get; set; }
         public required string Publisher { get; set; }
         public string? CoverFileName { get; set; }
@@ -15,7 +14,7 @@ namespace BookViewerApp.Data.Books.Entities
         [SetsRequiredMembers]
         public BookDbEntity()
         {
-            
+
         }
     }
 }
