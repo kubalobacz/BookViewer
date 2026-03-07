@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BookViewerApp.MobileApplication.Presentation.Books.Page.AddBookPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:generalViews="clr-namespace:BookViewerApp.MobileApplication.Presentation.General.Views"
+    xmlns:viewmodels="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.ViewModel"
+    Title="AddBookPage"
+    x:DataType="viewmodels:AddBookViewModel"
+    BackgroundColor="#ffffff"
+    NavigationPage.BackButtonTitle="">
+    <StackLayout Padding="20" Spacing="20">
+        <generalViews:GeneralEntry
+            EntryText="{Binding Title.Value}"
+            HeaderText="Title"
+            IsValid="{Binding Title.IsValid}" />
+        <generalViews:GeneralEntry
+            EntryText="{Binding ReleaseYear.Value}"
+            HeaderText="Publish year"
+            IsValid="{Binding ReleaseYear.IsValid}" />
+        <generalViews:GeneralEntry
+            EntryText="{Binding Publisher.Value}"
+            HeaderText="Publisher"
+            IsValid="{Binding Publisher.IsValid}" />
+        <generalViews:GeneralEntry
+            EntryText="{Binding CoverUrl.Value}"
+            HeaderText="Cover URL"
+            IsValid="{Binding CoverUrl.IsValid}" />
+        <generalViews:GeneralButton
+            Command="{Binding AddBookCommand}"
+            Text="Add book"
+            VerticalOptions="EndAndExpand" />
+    </StackLayout>
+</ContentPage>

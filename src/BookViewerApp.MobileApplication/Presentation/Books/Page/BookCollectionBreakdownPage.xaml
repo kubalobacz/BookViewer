@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BookViewerApp.MobileApplication.Presentation.Books.Page.BookCollectionBreakdownPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:uimodels="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.UIModels"
+    xmlns:views="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.Views"
+    xmlns:vm="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.ViewModel"
+    Title="BookCollectionBreakdownPage"
+    x:DataType="vm:BookCollectionBreakdownViewModel"
+    BackgroundColor="White">
+    <CollectionView ItemsSource="{Binding Books}">
+        <CollectionView.Footer>
+            <ContentView HeightRequest="60" Opacity="0" />
+        </CollectionView.Footer>
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout
+                ItemSpacing="20"
+                Orientation="Vertical"
+                SnapPointsType="None" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <views:BookCollectionElementView />
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

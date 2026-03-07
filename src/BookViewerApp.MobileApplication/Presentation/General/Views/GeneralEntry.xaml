@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<VerticalStackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookViewerApp.MobileApplication.Presentation.General.Views.GeneralEntry"
+             x:Name="this">
+    <VerticalStackLayout Spacing="3">
+        <Label 
+            Text="{Binding Source={x:Reference this}, Path=HeaderText}"
+            FontSize="Header"
+            HorizontalTextAlignment="Start"
+            FontAttributes="Bold"
+            TextColor="Black"/>
+        <Border StrokeShape="RoundRectangle 10"
+                StrokeThickness="2">
+            <Border.Triggers>
+                <DataTrigger TargetType="Border"
+                             Binding="{Binding Source={x:Reference this}, Path=IsValid}"
+                             Value="false">
+                    <Setter Property="Stroke" Value="{StaticResource WarningDefault}"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Border"
+                             Binding="{Binding Source={x:Reference this}, Path=IsValid}"
+                             Value="true">
+                    <Setter Property="Stroke" Value="{StaticResource ControlBorderDefault}"/>
+                </DataTrigger>
+            </Border.Triggers>
+            <Entry Text="{Binding Source={x:Reference this}, Path=EntryText}"
+                   TextColor="Black"
+                   FontAttributes="Bold"/>
+        </Border>
+    </VerticalStackLayout>
+</VerticalStackLayout>
