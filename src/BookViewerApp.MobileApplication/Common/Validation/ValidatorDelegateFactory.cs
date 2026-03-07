@@ -14,5 +14,10 @@ public static class ValidatorDelegateFactory
             return !input.Equals(default(T));
         };
     }
+
+    public static Func<string?, bool> IsDigit<T>()
+    {
+        return input => double.TryParse(input, out _);
+    }
 }
 
