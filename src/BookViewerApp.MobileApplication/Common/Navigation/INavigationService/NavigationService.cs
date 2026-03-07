@@ -1,6 +1,7 @@
-﻿using BookViewerApp.MobileApplication.Common;
-using BookViewerApp.MobileApplication.Common.IoC;
-using BookViewerApp.MobileApplication.Common.Navigation;
+﻿using BookViewerApp.MobileApplication.Common.IoC;
+using BookViewerApp.MobileApplication.Presentation.General.Views;
+using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Extensions;
 
 namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
 {
@@ -9,6 +10,8 @@ namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
         Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel;
         Task<TResult?> NavigateForResult<TViewModel, TResult>(Dictionary<string, object>? navigationParameters = null) where TViewModel : BaseViewModel, IResultProvider<TResult>;
         Task GoBack(bool isAnimated);
+        void DisplayLoadingPopup();
+        Task ClosePopup();
     }
 
     public class NavigationService() : INavigationService
@@ -61,7 +64,6 @@ namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
 
         public Task GoBack(bool isAnimated)
         {
-
             //Implement viewmodel disposing when closing page
             var mainPage = ResolveCurrentPage();
             return mainPage.Navigation.PopAsync(isAnimated);
@@ -71,6 +73,21 @@ namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
         {
 
             return Microsoft.Maui.Controls.Application.Current!.MainPage!;
+        }
+
+        public void DisplayLoadingPopup()
+        {
+            var currentPage = ResolveCurrentPage();
+            currentPage.ShowPopup(new LoadingPopupView(), new PopupOptions
+            {
+                CanBeDismissedByTappingOutsideOfPopup = false
+            });
+        }
+
+        public Task ClosePopup()
+        {
+            var currentPage = ResolveCurrentPage();
+            return currentPage.ClosePopupAsync();
         }
     }
 }

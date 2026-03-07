@@ -82,6 +82,9 @@
 	  <MauiXaml Update="Presentation\General\Views\GeneralEntry.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Presentation\General\Views\LoadingPopupView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
