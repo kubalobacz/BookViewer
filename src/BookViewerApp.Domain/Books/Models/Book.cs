@@ -10,6 +10,8 @@ namespace BookViewerApp.Domain.Books.Models
         public required string Title { get; set; }
         public int ReleaseYear { get; set; }
         public required string Publisher { get; set; }
+
+        //String instead of char for SQL support
         public string? PreferedSectionLetter { get; set; }
         public string? CoverFileName { get; set; }
 

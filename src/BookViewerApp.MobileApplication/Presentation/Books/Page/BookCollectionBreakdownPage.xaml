@@ -6,7 +6,7 @@
     xmlns:uimodels="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.UIModels"
     xmlns:views="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.Views"
     xmlns:vm="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.ViewModel"
-    Title="BookCollectionBreakdownPage"
+    Title="Book Viewer"
     x:DataType="vm:BookCollectionBreakdownViewModel"
     BackgroundColor="White">
     <CollectionView ItemsSource="{Binding Books}">
