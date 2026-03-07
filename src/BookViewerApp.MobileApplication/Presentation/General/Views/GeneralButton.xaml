@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BookViewerApp.MobileApplication.Presentation.General.Views.GeneralButton"
+    x:Name="this"
+    BackgroundColor="#7aeb34">
+    <Border.StrokeShape>
+        <RoundRectangle CornerRadius="15"/>
+    </Border.StrokeShape>
+    <Border.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=Command}"/>
+    </Border.GestureRecognizers>
+    <Border.Behaviors>
+        <toolkit:TouchBehavior 
+        DefaultAnimationDuration="250"
+        DefaultAnimationEasing="{x:Static Easing.CubicInOut}"
+        PressedOpacity="0.4"
+        PressedScale="0.6"/>
+    </Border.Behaviors>
+    <Label Text="{Binding Source={x:Reference this}, Path=Text}"
+           Padding="15"
+           TextColor="Black"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+</Border>
