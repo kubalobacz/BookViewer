@@ -9,8 +9,8 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.UIModels.Mappings
             {
                 ID = book.ID,
                 Title = book.Title,
-                Description = book.Description,
                 ReleaseYear = book.ReleaseYear,
+                Publisher = book.Publisher,
             };
         }
     }
