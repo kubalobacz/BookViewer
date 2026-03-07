@@ -2,14 +2,14 @@ namespace BookViewerApp.MobileApplication.Presentation.General.Views;
 
 public partial class GeneralEntry : VerticalStackLayout
 {
-	public GeneralEntry()
-	{
-		InitializeComponent();
-	}
-
-    public string EntryText
+    public GeneralEntry()
     {
-        get => (string)GetValue(EntryTextProperty);
+        InitializeComponent();
+    }
+
+    public object EntryText
+    {
+        get => (object)GetValue(EntryTextProperty);
         set => SetValue(EntryTextProperty, value);
     }
 
@@ -25,7 +25,7 @@ public partial class GeneralEntry : VerticalStackLayout
         set => SetValue(IsValidProperty, value);
     }
 
-    public static readonly BindableProperty EntryTextProperty = BindableProperty.Create(nameof(EntryText), typeof(string), typeof(GeneralButton), string.Empty, BindingMode.TwoWay);
+    public static readonly BindableProperty EntryTextProperty = BindableProperty.Create(nameof(EntryText), typeof(object), typeof(GeneralButton), null, BindingMode.TwoWay);
     public static readonly BindableProperty HeaderTextProperty = BindableProperty.Create(nameof(HeaderText), typeof(string), typeof(GeneralEntry), string.Empty);
     public static readonly BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(GeneralEntry), false);
 

@@ -21,7 +21,8 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
         }
 
         public ValidatableProperty<string?> Title { get; } = new ValidatableProperty<string?>(ValidatorDelegateFactory.Required<string?>());
-        public ValidatableProperty<int?> ReleaseYear { get; } = new ValidatableProperty<int?>(ValidatorDelegateFactory.Required<int?>());
+        public ValidatableProperty<string?> ReleaseYear { get; } = new ValidatableProperty<string?>(ValidatorDelegateFactory.Required<string?>(),
+                                                                                                    ValidatorDelegateFactory.IsDigit<string?>());
         public ValidatableProperty<string?> Publisher { get; } = new ValidatableProperty<string?>(ValidatorDelegateFactory.Required<string?>());
         public ValidatableProperty<string?> CoverUrl { get; }
 
@@ -38,7 +39,7 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
             var addBootDTO = new AddBookDTO
             {
                 Title = Title.Value!,
-                ReleaseYear = ReleaseYear.Value!.Value,
+                ReleaseYear = int.Parse(ReleaseYear.Value!),
                 Publisher = Publisher.Value!,
                 CoverURL = uri!
             };

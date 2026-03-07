@@ -6,12 +6,14 @@ namespace BookViewerApp.MobileApplication.Common.Validation
     {
         private T _value;
         private bool _isValid;
-        private readonly Func<T, bool> _validationDelegate;
+        private readonly Func<T, bool>[] _validationDelegateArr;
         private readonly Lock _lock = new();
 
-        public ValidatableProperty(Func<T, bool> validationDelegate)
+
+
+        public ValidatableProperty(params Func<T, bool>[] validationDelegateArr)
         {
-            _validationDelegate = validationDelegate;
+            _validationDelegateArr = validationDelegateArr;
         }
 
         public T Value
@@ -22,9 +24,9 @@ namespace BookViewerApp.MobileApplication.Common.Validation
                 lock (_lock)
                 {
                     SetProperty(ref _value, value);
-                    IsValid = _validationDelegate(value);
+                    IsValid = _validationDelegateArr.All(validator => validator(value));
                 }
-            }               
+            }
         }
 
         public bool IsValid
