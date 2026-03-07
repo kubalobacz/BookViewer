@@ -1,15 +1,15 @@
 ﻿namespace BookViewerApp.MobileApplication.Common.Screen
 {
-    class ScreenMeasureCalculator
+    public static class ScreenMeasureCalculator
     {
-        public double GetScreenWidthInDIU()
+        public static double GetScreenWidthInDIU()
         {
             var mainDisplay = DeviceDisplay.MainDisplayInfo;
             double widthDIU = mainDisplay.Width / mainDisplay.Density;
             return widthDIU;
         }
 
-        public double GetScreenHeightInDIU()
+        public static double GetScreenHeightInDIU()
         {
             var mainDisplay = DeviceDisplay.MainDisplayInfo;
             double heightDIU = mainDisplay.Height / mainDisplay.Density;

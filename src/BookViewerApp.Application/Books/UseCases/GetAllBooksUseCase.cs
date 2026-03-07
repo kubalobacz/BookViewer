@@ -16,6 +16,7 @@ namespace BookViewerApp.Application.Books.UseCases
         public async Task<IReadOnlyList<Book>> ExecuteAsync(int resizeRatio)
         {
             var books = await _booksRepository.FindAll();
+            var booksCount = books.Count();
 
             var tasks = books
                 .Where(book => string.IsNullOrEmpty(book.CoverFileName))
@@ -29,6 +30,11 @@ namespace BookViewerApp.Application.Books.UseCases
 
             await Task.WhenAll(tasks);
             return books;
+        }
+
+        public Task<bool> HasCachedBooks()
+        {
+            return _booksRepository.HasCachedData();
         }
     }
 }

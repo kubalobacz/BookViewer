@@ -74,5 +74,12 @@ namespace BookViewerApp.Data.Books.Repositories
             var mappedBook = entity.ToDbEntity();
             return await _database!.InsertAsync(mappedBook);
         }
+
+        public async Task<bool> HasCachedData()
+        {
+            await InitializeAsync();
+            var book = await _database.Table<BookDbEntity>().FirstOrDefaultAsync();
+            return book != null;
+        }
     }
 }

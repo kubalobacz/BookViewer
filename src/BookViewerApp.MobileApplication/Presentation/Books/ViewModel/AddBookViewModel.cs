@@ -1,5 +1,4 @@
 ﻿using BookViewerApp.MobileApplication.Common;
-using BookViewerApp.MobileApplication.Common.Interfaces;
 using BookViewerApp.MobileApplication.Common.Navigation;
 using BookViewerApp.MobileApplication.Common.Navigation.INavigationService;
 using BookViewerApp.MobileApplication.Common.Validation;
@@ -8,7 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
 {
-    public partial class AddBookViewModel : BaseViewModel, IResultProvider<AddBookDTO>, IValidatable
+    public partial class AddBookViewModel : BaseViewModel, IResultProvider<AddBookDTO>
     {
         private TaskCompletionSource<AddBookDTO?>? _tcs;
 

@@ -1,7 +1,6 @@
 ﻿using BookViewerApp.Application.Books;
 using BookViewerApp.Application.Books.UseCases;
 using BookViewerApp.MobileApplication.Common;
-using BookViewerApp.MobileApplication.Common.Interfaces;
 using BookViewerApp.MobileApplication.Common.Navigation.INavigationService;
 using BookViewerApp.MobileApplication.Presentation.Books.DTOs;
 using BookViewerApp.MobileApplication.Presentation.Books.DTOs.MappingExtensions;
@@ -13,7 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
 {
-    public partial class BookCollectionBreakdownViewModel : BaseViewModel, IInitializable
+    public partial class BookCollectionBreakdownViewModel : BaseViewModel
     {
         private readonly GetAllBooksUseCase _getAllBooksUseCase;
         private readonly AddBookUseCase _addBookUseCase;
@@ -24,34 +23,33 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
         {
             _getAllBooksUseCase = getAllBooksUseCase;
             _addBookUseCase = addBookUseCase;
-            var x = new BookTitleFirstCharacterExtractor();
         }
 
         [ObservableProperty]
         public List<BookCollectionElementUIModel> books;
 
-        public bool IsInitialized { get; set; }
+        public override async void Initialize()
+        {
+            try
+            {
+                await SetBooks();
+            }
+            catch (Exception)
+            {
+                //TODO: Log and perform mobile specific error handling.
+                throw;
+            }
+        }
 
         public override async Task InitializeAsync()
         {
             try
             {
-                var bookUIModels = new List<BookUIModel>();
-                var domainBookModels = await _getAllBooksUseCase.ExecuteAsync(_imageResizeRatio);
-                foreach (var book in domainBookModels)
-                {
-                    bookUIModels.Add(book.ToBookUIModel());
-                }
-
-                var characterExtractor = new BookTitleFirstCharacterExtractor();
-                Books = bookUIModels.GroupBy(b => characterExtractor.DecideBookTitleFirstLetter(b.Title))
-                    .Select(b => new BookCollectionElementUIModel(b.ToObservableCollection(), b.Key, NavigateToAddBookPageCommand))
-                    .OrderBy(b => b.StartingLetter)
-                    .ToList();
-
-                IsInitialized = true;
+                _navigationService.DisplayLoadingPopup();
+                await SetBooks();
+                await _navigationService.ClosePopup();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //TODO: Log and perform mobile specific error handling.
                 throw;
@@ -82,6 +80,31 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
             finally
             {
                 await _navigationService.GoBack(true);
+            }
+        }
+
+        public override Task<bool> CanInitializeSynchronously()
+        {
+            return _getAllBooksUseCase.HasCachedBooks();
+        }
+
+        private async Task SetBooks()
+        {
+            {
+                var bookUIModels = new List<BookUIModel>();
+                var domainBookModels = await _getAllBooksUseCase.ExecuteAsync(_imageResizeRatio);
+                foreach (var book in domainBookModels)
+                {
+                    bookUIModels.Add(book.ToBookUIModel());
+                }
+
+                var characterExtractor = new BookTitleFirstCharacterExtractor();
+                Books = bookUIModels.GroupBy(b => characterExtractor.DecideBookTitleFirstLetter(b.Title))
+                    .Select(b => new BookCollectionElementUIModel(b.ToObservableCollection(), b.Key, NavigateToAddBookPageCommand))
+                    .OrderBy(b => b.StartingLetter)
+                    .ToList();
+
+                IsInitialized = true;
             }
         }
     }
