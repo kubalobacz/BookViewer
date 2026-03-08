@@ -10,6 +10,7 @@ namespace BookViewerApp.MobileApplication.Common.Navigation
         {
             {typeof(BookCollectionBreakdownViewModel), typeof(BookCollectionBreakdownPage) },
             {typeof(AddBookViewModel), typeof(AddBookPage) },
+            {typeof(BookDetailsViewModel), typeof(BookDetailsPage) },
         };
 
         public static Type MapViewModelTypeToPageType(Type viewModelType)

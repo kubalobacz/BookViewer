@@ -13,11 +13,15 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.UIModels
 
         public ICommand AddBookCommand { get; }
 
-        public BookCollectionElementUIModel(ObservableCollection<BookUIModel> books, char startingLetter, ICommand addBookCommand)
+        public ICommand DisplayBookDetailsCommand { get; }
+
+        public BookCollectionElementUIModel(ObservableCollection<BookUIModel> books, char startingLetter,
+                                            ICommand addBookCommand, ICommand displayBookDetailsCommand)
         {
             Books = books;
             StartingLetter = startingLetter;
             AddBookCommand = addBookCommand;
+            DisplayBookDetailsCommand = displayBookDetailsCommand;
         }
     }
 }

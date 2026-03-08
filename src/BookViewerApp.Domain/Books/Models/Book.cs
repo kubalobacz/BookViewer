@@ -14,6 +14,7 @@ namespace BookViewerApp.Domain.Books.Models
         //String instead of char for SQL support
         public string? PreferedSectionLetter { get; set; }
         public string? CoverFileName { get; set; }
+        public string? NotesJson { get; set; }
 
         [SetsRequiredMembers]
         public Book()

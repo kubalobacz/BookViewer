@@ -73,6 +73,9 @@
 	  <MauiXaml Update="Presentation\Books\Page\BookCollectionBreakdownPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Presentation\Books\Page\BookDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Presentation\Books\Views\BookCollectionElementView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
