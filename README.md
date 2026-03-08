@@ -1,4 +1,4 @@
-# Big Blue Marble code assignment
+# Recruitment code assignment
 
 ## How to run project?
 Ensure you have MAUI workload installed.
