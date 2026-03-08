@@ -1,11 +1,12 @@
 ﻿using BookViewerApp.Application.Books.UseCases.DTO;
 using BookViewerApp.Application.Books.UseCases.DTO.MappingExtensions;
+using BookViewerApp.Application.Books.UseCases.Interfaces;
 using BookViewerApp.Domain.Books.Contracts;
 using BookViewerApp.Domain.Books.Models;
 
 namespace BookViewerApp.Application.Books.UseCases
 {
-    public class AddBookUseCase
+    public class AddBookUseCase : IAddBookUseCase
     {
 
         private readonly IBooksRepository _booksRepository;

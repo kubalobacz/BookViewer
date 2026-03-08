@@ -1,5 +1,5 @@
 ﻿using BookViewerApp.Application.Books;
-using BookViewerApp.Application.Books.UseCases;
+using BookViewerApp.Application.Books.UseCases.Interfaces;
 using BookViewerApp.MobileApplication.Common;
 using BookViewerApp.MobileApplication.Common.Navigation;
 using BookViewerApp.MobileApplication.Common.Navigation.INavigationService;
@@ -16,12 +16,12 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
 {
     public partial class BookCollectionBreakdownViewModel : BaseViewModel
     {
-        private readonly GetAllBooksUseCase _getAllBooksUseCase;
-        private readonly AddBookUseCase _addBookUseCase;
+        private readonly IGetAllBooksUseCase _getAllBooksUseCase;
+        private readonly IAddBookUseCase _addBookUseCase;
         //In real app select this based on device info
         private int _imageResizeRatio = 1;
 
-        public BookCollectionBreakdownViewModel(INavigationService navigationService, GetAllBooksUseCase getAllBooksUseCase, AddBookUseCase addBookUseCase) : base(navigationService)
+        public BookCollectionBreakdownViewModel(INavigationService navigationService, IGetAllBooksUseCase getAllBooksUseCase, IAddBookUseCase addBookUseCase) : base(navigationService)
         {
             _getAllBooksUseCase = getAllBooksUseCase;
             _addBookUseCase = addBookUseCase;

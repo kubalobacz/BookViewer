@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.Data", "BookV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.Application", "BookViewerApp.Application\BookViewerApp.Application.csproj", "{4984ACC1-6CEB-4B09-BB56-1564AD4455A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.UnitTests", "BookViewerApp.UnitTests\BookViewerApp.UnitTests.csproj", "{8AD21B7B-B9DF-4F7D-863B-3B71856DD217}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{4984ACC1-6CEB-4B09-BB56-1564AD4455A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4984ACC1-6CEB-4B09-BB56-1564AD4455A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4984ACC1-6CEB-4B09-BB56-1564AD4455A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AD21B7B-B9DF-4F7D-863B-3B71856DD217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AD21B7B-B9DF-4F7D-863B-3B71856DD217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AD21B7B-B9DF-4F7D-863B-3B71856DD217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AD21B7B-B9DF-4F7D-863B-3B71856DD217}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,9 @@
-﻿using BookViewerApp.Domain.Books.Contracts;
+﻿using BookViewerApp.Application.Books.UseCases.Interfaces;
+using BookViewerApp.Domain.Books.Contracts;
 using BookViewerApp.Domain.Books.Models;
 namespace BookViewerApp.Application.Books.UseCases
 {
-    public class GetAllBooksUseCase
+    public class GetAllBooksUseCase : IGetAllBooksUseCase
     {
         private readonly IBooksRepository _booksRepository;
         private readonly IImageRepository _imageRepository;
