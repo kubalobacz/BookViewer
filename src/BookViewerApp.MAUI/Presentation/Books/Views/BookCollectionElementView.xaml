@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="BookViewerApp.MobileApplication.Presentation.Books.Views.BookCollectionElementView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:uimodels="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.UIModels"
+    x:Name="RootGrid"
+    x:DataType="uimodels:BookCollectionElementUIModel"
+    ColumnDefinitions="auto,*"
+    RowDefinitions="*,auto">
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Color x:Key="DescriptionTextColor">#76736B</Color>
+        </ResourceDictionary>
+    </Grid.Resources>
+    <Label
+        x:Name="LetterLabel"
+        Margin="10"
+        FontAttributes="Bold"
+        FontSize="Large"
+        Text="{Binding StartingLetter}"
+        TextColor="#eb7a34" />
+    <ImageButton
+        x:Name="IconImage"
+        Grid.Column="1"
+        Margin="10"
+        Command="{Binding AddBookCommand}"
+        CommandParameter="{Binding StartingLetter}"
+        HeightRequest="0"
+        HorizontalOptions="End"
+        Source="plus_icon.svg">
+        <ImageButton.Behaviors>
+            <toolkit:IconTintColorBehavior TintColor="#7aeb34" />
+        </ImageButton.Behaviors>
+    </ImageButton>
+    <CollectionView
+        x:Name="BookCollectionView"
+        Grid.Row="1"
+        Grid.ColumnSpan="2"
+        HorizontalScrollBarVisibility="Never"
+        ItemsSource="{Binding Books}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout
+                ItemSpacing="15"
+                Orientation="Horizontal"
+                SnapPointsType="None" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="uimodels:BookUIModel">
+                <Border
+                    x:Name="BookBorder"
+                    BackgroundColor="#ffffff"
+                    StrokeShape="RoundRectangle 10">
+                    <Border.Behaviors>
+                        <toolkit:TouchBehavior Command="{Binding BindingContext.DisplayBookDetailsCommand, Source={x:Reference RootGrid}}" CommandParameter="{Binding BindingContext, Source={x:Reference BookBorder}}" />
+                    </Border.Behaviors>
+                    <Grid
+                        x:Name="BookElementGrid"
+                        BackgroundColor="#F4F0E6"
+                        ColumnDefinitions="*"
+                        HeightRequest="200"
+                        RowDefinitions="3*,*,auto"
+                        WidthRequest="150">
+                        <ffimageloading:CachedImage
+                            Grid.Row="0"
+                            Aspect="AspectFill"
+                            Source="{Binding Image}" />
+                        <Label
+                            Grid.Row="1"
+                            Margin="5"
+                            FontAttributes="Bold"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="2"
+                            Text="{Binding Title}"
+                            TextColor="Black" />
+                        <Label
+                            Grid.Row="2"
+                            Margin="5"
+                            FontSize="10"
+                            LineBreakMode="TailTruncation">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding ReleaseYear}" TextColor="{StaticResource DescriptionTextColor}" />
+                                    <Span Text=" | " />
+                                    <Span Text="{Binding Publisher}" TextColor="{StaticResource DescriptionTextColor}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</Grid>

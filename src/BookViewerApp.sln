@@ -5,7 +5,7 @@ VisualStudioVersion = 18.3.11520.95
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.Domain", "BookViewerApp.Domain\BookViewerApp.Domain.csproj", "{5A988B49-0E62-4392-B012-6F1489A79887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.MAUI", "BookViewerApp.MobileApplication\BookViewerApp.MAUI.csproj", "{2F59F21D-5E54-4D0C-ABC1-12492155F6DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.MAUI", "BookViewerApp.MAUI\BookViewerApp.MAUI.csproj", "{2F59F21D-5E54-4D0C-ABC1-12492155F6DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookViewerApp.Data", "BookViewerApp.Data\BookViewerApp.Data.csproj", "{5D5EF296-B24C-4BB4-A064-9692B862B07E}"
 EndProject
