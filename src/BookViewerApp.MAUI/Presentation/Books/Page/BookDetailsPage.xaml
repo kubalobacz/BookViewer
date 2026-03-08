@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:vm="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.ViewModel"
-    Title="BookDetailsPage"
+    Title=""
     x:DataType="vm:BookDetailsViewModel"
     BackgroundColor="#ffffff">
     <Grid RowDefinitions="3*,2*">
