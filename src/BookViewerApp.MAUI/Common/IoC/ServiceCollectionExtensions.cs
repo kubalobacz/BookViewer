@@ -1,4 +1,5 @@
 ﻿using BookViewerApp.Application.Books.UseCases;
+using BookViewerApp.Application.Books.UseCases.Interfaces;
 using BookViewerApp.Application.Common.Interfaces;
 using BookViewerApp.Data.Books.API;
 using BookViewerApp.Data.Books.Repositories;
@@ -39,8 +40,8 @@ namespace BookViewerApp.MobileApplication.Common.IoC
 
         public static void RegisterUseCases(this IServiceCollection services)
         {
-            services.AddScoped<GetAllBooksUseCase>();
-            services.AddScoped<AddBookUseCase>();
+            services.AddScoped<IGetAllBooksUseCase, GetAllBooksUseCase>();
+            services.AddScoped<IAddBookUseCase, AddBookUseCase>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
