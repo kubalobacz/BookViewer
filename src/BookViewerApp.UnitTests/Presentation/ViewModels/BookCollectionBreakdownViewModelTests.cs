@@ -43,7 +43,6 @@ public class BookCollectionBreakdownViewModelTests
 
         await _vm.InitializeAsync();
 
-        // Assert
         _vm.Books.Should().HaveCount(3);
         _vm.Books.Select(x => x.StartingLetter)
             .Should().Contain(new[] { 'Q', 'A', 'Z' });
