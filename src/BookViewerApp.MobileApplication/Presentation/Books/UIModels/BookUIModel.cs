@@ -11,8 +11,9 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.UIModels
         public string? CoverFileName { get; init; }
         public char LetterSection { get; set; }
         public ImageSource? Image { get; }
+        public string[]? Notes { get; init; }
 
-        public BookUIModel(string title, string publisher, string? coverFileName = null)
+        public BookUIModel(string title, string publisher, string? coverFileName = null, string[]? notes = null)
         {
             Title = title;
             Publisher = publisher;

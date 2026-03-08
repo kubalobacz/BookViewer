@@ -1,4 +1,5 @@
 ﻿using BookViewerApp.MobileApplication.Common.IoC;
+using BookViewerApp.MobileApplication.Common.Navigation.Interfaces;
 using BookViewerApp.MobileApplication.Presentation.General.Views;
 using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Extensions;
@@ -8,6 +9,7 @@ namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
     public interface INavigationService
     {
         Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel;
+        Task NavigateToAsync<TViewModel>(Dictionary<string, object> navigationParameters) where TViewModel : BaseViewModel, INavigationAware;
         Task<TResult?> NavigateForResult<TViewModel, TResult>(Dictionary<string, object>? navigationParameters = null) where TViewModel : BaseViewModel, IResultProvider<TResult>;
         Task GoBack(bool isAnimated);
         void DisplayLoadingPopup();
@@ -23,12 +25,7 @@ namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
             var destinationViewModel = navigationObjectsTuple.destinationViewModel;
             var currentWindow = navigationObjectsTuple.mainPage;
 
-            if (destinationPage is ContentPage contentPage)
-            {
-                return currentWindow.Navigation.PushAsync(destinationPage);
-            }
-
-            return Task.CompletedTask;
+            return currentWindow.Navigation.PushAsync(destinationPage);
         }
 
         public async Task<TResult?> NavigateForResult<TViewModel, TResult>(Dictionary<string, object>? navigationParameters) where TViewModel : BaseViewModel, IResultProvider<TResult>
@@ -88,6 +85,17 @@ namespace BookViewerApp.MobileApplication.Common.Navigation.INavigationService
         {
             var currentPage = ResolveCurrentPage();
             return currentPage.ClosePopupAsync();
+        }
+
+        public async Task NavigateToAsync<TViewModel>(Dictionary<string, object> navigationParameters) where TViewModel : BaseViewModel, INavigationAware
+        {
+            var navigationObjectsTuple = ResolveNavigationObjects(typeof(TViewModel));
+            var destinationPage = navigationObjectsTuple.destinationPage;
+            var destinationViewModel = navigationObjectsTuple.destinationViewModel;
+            var currentWindow = navigationObjectsTuple.mainPage;
+
+            await currentWindow.Navigation.PushAsync(destinationPage);
+            ((TViewModel)destinationViewModel).OnNavigatedTo(navigationParameters);
         }
     }
 }

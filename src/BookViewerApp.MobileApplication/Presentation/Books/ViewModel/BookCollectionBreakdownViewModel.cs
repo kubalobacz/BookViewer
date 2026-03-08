@@ -1,6 +1,7 @@
 ﻿using BookViewerApp.Application.Books;
 using BookViewerApp.Application.Books.UseCases;
 using BookViewerApp.MobileApplication.Common;
+using BookViewerApp.MobileApplication.Common.Navigation;
 using BookViewerApp.MobileApplication.Common.Navigation.INavigationService;
 using BookViewerApp.MobileApplication.Presentation.Books.DTOs;
 using BookViewerApp.MobileApplication.Presentation.Books.DTOs.MappingExtensions;
@@ -9,6 +10,7 @@ using BookViewerApp.MobileApplication.Presentation.Books.UIModels.Mappings;
 using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Text.Json;
 
 namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
 {
@@ -83,6 +85,24 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
             }
         }
 
+        [RelayCommand]
+        private async Task NavigateToBookDetails(object selectedBook)
+        {
+            try
+            {
+                var navigationParameters = new Dictionary<string, object>
+                {
+                    { NavigationParametersConstants.BOOK_DETAILS, selectedBook }
+                };
+                await _navigationService.NavigateToAsync<BookDetailsViewModel>(navigationParameters);
+            }
+            catch (Exception)
+            {
+                //TODO: Log and perform mobile specific error handling.
+                throw;
+            }
+        }
+
         public override Task<bool> CanInitializeSynchronously()
         {
             return _getAllBooksUseCase.HasCachedBooks();
@@ -97,19 +117,22 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.ViewModel
                 .Select(book =>
                 {
                     var sectionLetter = book.PreferedSectionLetter ?? characterExtractor.DecideBookTitleFirstLetter(book.Title).ToString();
+                    string[] notesArray = string.IsNullOrEmpty(book.NotesJson)
+                                              ? Array.Empty<string>()
+                                              : JsonSerializer.Deserialize<string[]>(book.NotesJson)!;
 
-                    return book.ToBookUIModel(sectionLetter.FirstOrDefault());
+                    return book.ToBookUIModel(sectionLetter.FirstOrDefault(), notesArray);
                 })
                 .GroupBy(b => b.LetterSection)
                 .Select(g => new BookCollectionElementUIModel(
                     g.ToObservableCollection(),
                     g.Key,
-                    NavigateToAddBookPageCommand))
+                    NavigateToAddBookPageCommand,
+                    NavigateToBookDetailsCommand))
                 .OrderBy(b => b.StartingLetter)
                 .ToList();
 
             IsInitialized = true;
-
         }
     }
 }

@@ -6,6 +6,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:uimodels="clr-namespace:BookViewerApp.MobileApplication.Presentation.Books.UIModels"
+    x:Name="RootGrid"
     x:DataType="uimodels:BookCollectionElementUIModel"
     ColumnDefinitions="auto,*"
     RowDefinitions="*,auto">
@@ -48,7 +49,13 @@
         </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="uimodels:BookUIModel">
-                <Border BackgroundColor="#ffffff" StrokeShape="RoundRectangle 10">
+                <Border
+                    x:Name="BookBorder"
+                    BackgroundColor="#ffffff"
+                    StrokeShape="RoundRectangle 10">
+                    <Border.Behaviors>
+                        <toolkit:TouchBehavior Command="{Binding BindingContext.DisplayBookDetailsCommand, Source={x:Reference RootGrid}}" CommandParameter="{Binding BindingContext, Source={x:Reference BookBorder}}" />
+                    </Border.Behaviors>
                     <Grid
                         x:Name="BookElementGrid"
                         BackgroundColor="#F4F0E6"

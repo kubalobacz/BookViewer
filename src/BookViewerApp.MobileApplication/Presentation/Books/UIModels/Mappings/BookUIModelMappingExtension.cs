@@ -3,7 +3,7 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.UIModels.Mappings
 {
     internal static class BookUIModelMappingExtension
     {
-        internal static BookUIModel ToBookUIModel(this Book book, char sectionLetter)
+        internal static BookUIModel ToBookUIModel(this Book book, char sectionLetter, string[]? notes = null)
         {
             return new BookUIModel(book.Title, book.Publisher, book.CoverFileName)
             {
@@ -11,7 +11,8 @@ namespace BookViewerApp.MobileApplication.Presentation.Books.UIModels.Mappings
                 Title = book.Title,
                 ReleaseYear = book.ReleaseYear,
                 Publisher = book.Publisher,
-                LetterSection = sectionLetter
+                LetterSection = sectionLetter,
+                Notes = notes
             };
         }
     }

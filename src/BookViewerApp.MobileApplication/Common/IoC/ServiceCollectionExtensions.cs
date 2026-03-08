@@ -19,8 +19,10 @@ namespace BookViewerApp.MobileApplication.Common.IoC
         {
             services.AddTransient<BookCollectionBreakdownViewModel>();
             services.AddTransient<AddBookViewModel>();
+            services.AddTransient<BookDetailsViewModel>();
             services.AddTransient<BookCollectionBreakdownPage>();
             services.AddTransient<AddBookPage>();
+            services.AddTransient<BookDetailsPage>();
         }
 
         public static void RegisterApplicationServices(this IServiceCollection services)
