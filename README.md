@@ -6,7 +6,7 @@ Ensure you have MAUI workload installed.
    ```bash
    dotnet workload install maui
    ```
-If you have .NET 10 installed along with android and Java SDK, you should be able to build application using either CLI or IDE of your choice.
+If you have .NET 10 installed along with android and Java SDK, you should be able to build Android application using either CLI or IDE of your choice.
 
 ## AI Usage 🤖
 I have used AI mainly to ensure how my data flows between Clean Architecture layers.
